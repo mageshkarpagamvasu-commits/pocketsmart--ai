@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} · PocketSmart AI{% endblock %}
+{% block content %}
+<div class="panel">
+  <h2>{{ title }}</h2>
+  {% if error %}<div class="alert">{{ error }}</div>{% endif %}
+  <form method="post" action="/generate-{{ kind }}" enctype="multipart/form-data" onsubmit="var b=this.querySelector('button');b.disabled=true;b.textContent='Thinking… ✨';">
+    <label>Total budget (₹) <input type="number" name="budget" min="500" step="100" required></label>
+
+    {% if kind == 'home' %}
+      <label>Style
+        <select name="style"><option>Modern</option><option>Minimal</option><option>Traditional</option><option>Scandinavian</option><option>Boho</option></select>
+      </label>
+      <fieldset><legend>Rooms</legend>
+        {% for r in ['Living Room','Kitchen','Bedroom','Dining Area','Bathroom'] %}
+          <label class="chk"><input type="checkbox" name="rooms" value="{{ r }}"> {{ r }}</label>
+        {% endfor %}
+      </fieldset>
+      <div class="row">
+        <label>Lights <input type="number" name="lights" min="0" value="0"></label>
+        <label>Ceiling fans <input type="number" name="fans" min="0" value="0"></label>
+        <label>Dining tables <input type="number" name="tables" min="0" value="0"></label>
+        <label>Sofas <input type="number" name="sofas" min="0" value="0"></label>
+        <label>Beds <input type="number" name="beds" min="0" value="0"></label>
+      </div>
+
+    {% elif kind == 'party' %}
+      <label>Event type
+        <select name="event_type"><option>Birthday</option><option>Wedding</option><option>Corporate</option><option>Anniversary</option><option>Baby Shower</option></select>
+      </label>
+      <label>Number of guests <input type="number" name="guests" min="1" value="25" required></label>
+      <label>Venue / city <input name="venue" placeholder="e.g. Home terrace, Chennai"></label>
+
+    {% else %}
+      <label>Occasion
+        <select name="occasion"><option>Wedding</option><option>Festival</option><option>Office</option><option>Party</option><option>Casual</option></select>
+      </label>
+      <label>Style preference
+        <select name="style"><option>Traditional</option><option>Modern</option><option>Minimal</option><option>Statement</option></select>
+      </label>
+      <label>Outfit image (optional) <input type="file" name="image" accept="image/jpeg,image/png,image/webp"></label>
+    {% endif %}
+
+    <button class="btn" type="submit">Get recommendations</button>
+  </form>
+</div>
+{% endblock %}

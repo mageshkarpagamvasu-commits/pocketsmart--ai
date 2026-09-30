@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Recommendations · PocketSmart AI{% endblock %}
+{% block content %}
+<div class="panel wide">
+  <h2>{{ title }} — Your plan</h2>
+  <p>{{ result.summary }}</p>
+  <div class="totals">
+    <span>Budget: <b>₹{{ budget|inr }}</b></span>
+    <span class="{{ 'bad' if result.over_budget else 'good' }}">Estimated total: <b>₹{{ result.total|inr }}</b></span>
+  </div>
+  {% if result.over_budget %}<div class="alert">Estimated total is above your budget — consider swapping the costliest item.</div>{% endif %}
+  <div class="grid">
+    {% for it in result['items'] %}
+    <div class="card">
+      <span class="badge">{{ it.category }}</span>
+      <h3>{{ it.name }}</h3>
+      <p class="price">₹{{ it.price|inr }} <small>on {{ it.platform }}</small></p>
+      <p>{{ it.reason }}</p>
+      <a class="btn small" href="{{ it.link }}" target="_blank" rel="noopener">Search on {{ it.platform }} ↗</a>
+    </div>
+    {% endfor %}
+  </div>
+  {% if result.tips %}<h3>💡 Tips</h3><ul>{% for t in result.tips %}<li>{{ t }}</li>{% endfor %}</ul>{% endif %}
+  <p class="muted">Prices are AI estimates. Check the live price on the platform before buying.</p>
+  <a class="btn" href="/{{ kind }}-planner">Plan again</a> <a class="btn ghost" href="/history">History</a>
+</div>
+{% endblock %}

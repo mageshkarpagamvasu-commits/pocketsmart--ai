@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Dashboard · PocketSmart AI{% endblock %}
+{% block content %}
+<div class="panel wide">
+  <h2>Hi {{ user.username }} 👋</h2>
+  <p class="muted">You have made {{ total }} plan{{ '' if total == 1 else 's' }} so far.</p>
+  <div class="grid">
+    <a class="card" href="/home-planner"><h3>🏠 Home</h3><p>Plan interiors</p></a>
+    <a class="card" href="/party-planner"><h3>🎉 Party</h3><p>Plan an event</p></a>
+    <a class="card" href="/jewelry-planner"><h3>💍 Jewelry</h3><p>Match your outfit</p></a>
+  </div>
+  <h3>Recent plans</h3>
+  {% include "_list.html" %}
+</div>
+{% endblock %}

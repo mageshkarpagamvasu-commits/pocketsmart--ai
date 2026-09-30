@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Register' if mode == 'register' else 'Login' }} · PocketSmart AI{% endblock %}
+{% block content %}
+<div class="panel narrow">
+  <h2>{{ 'Create your account' if mode == 'register' else 'Welcome back' }}</h2>
+  {% if error %}<div class="alert">{{ error }}</div>{% endif %}
+  <form method="post" action="/{{ mode }}">
+    <label>Username <input name="username" required minlength="3"></label>
+    {% if mode == 'register' %}<label>Email <input type="email" name="email" required></label>{% endif %}
+    <label>Password <input type="password" name="password" required minlength="6"></label>
+    <button class="btn" type="submit">{{ 'Register' if mode == 'register' else 'Login' }}</button>
+  </form>
+  <p class="muted">{% if mode == 'register' %}Already have an account? <a href="/login">Login</a>{% else %}New here? <a href="/register">Register</a>{% endif %}</p>
+</div>
+{% endblock %}

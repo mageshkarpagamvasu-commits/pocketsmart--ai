@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <h1>Plan smarter. Spend less.</h1>
+  <p>Tell PocketSmart AI your budget and get personalised picks for your home, party or jewelry from Amazon, Flipkart, IKEA, Swiggy, Zomato and more.</p>
+  <a class="btn big" href="{{ '/dashboard' if user else '/register' }}">Start planning</a>
+</section>
+<section class="grid">
+  <a class="card" href="/home-planner"><h3>🏠 Home Planner</h3><p>Rooms, lights, fans, tables — balanced by style and price.</p></a>
+  <a class="card" href="/party-planner"><h3>🎉 Party Planner</h3><p>Budget split across catering, decor and entertainment.</p></a>
+  <a class="card" href="/jewelry-planner"><h3>💍 Jewelry Planner</h3><p>Upload your outfit and get matching jewelry within budget.</p></a>
+</section>
+<h2 class="center">What users say</h2>
+<section class="grid">
+  <div class="card"><p>“Decorated my flat under ₹40,000 with zero stress.”</p><small>— Priya, Chennai</small></div>
+  <div class="card"><p>“The party budget split saved us from overspending on catering.”</p><small>— Arun, Coimbatore</small></div>
+  <div class="card"><p>“Jewelry matched my saree perfectly!”</p><small>— Meena, Madurai</small></div>
+</section>
+{% endblock %}
